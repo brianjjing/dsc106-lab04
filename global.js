@@ -100,7 +100,7 @@ export async function fetchJSON(url) {
     }
   }
 
-export function renderProjects(project, containerElement, headingLevel = 'h2') {
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
     containerElement.innerHTML = ''; //Clear existing content from container
 
     const validHeadings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
