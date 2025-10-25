@@ -31,7 +31,7 @@ document.body.prepend(nav); //Puts the new nav element at the start of <body>
 //Ensuring internal links both when run locally, and when deployed:
 const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
     ? "/"                  // Local server
-    : "/dsc106-lab03/";         // GitHub Pages repo name
+    : "/dsc106-lab04/";         // GitHub Pages repo name
 
 
 for (let p of pages) { //Adding a elements in the nav for each page
@@ -83,3 +83,48 @@ select.addEventListener('input', function (event) {
     localStorage.colorScheme = event.target.value
     console.log('color scheme changed to', event.target.value);
 });
+
+
+// PROJECTS FOR JS:
+export async function fetchJSON(url) {
+    try {
+      // Fetch the JSON file from the given URL
+        const response = await fetch(url);
+        if (!response.ok) {
+        throw new Error(`Failed to fetch projects: ${response.statusText}`);
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching or parsing JSON data:', error);
+    }
+  }
+
+export function renderProjects(project, containerElement, headingLevel = 'h2') {
+    containerElement.innerHTML = ''; //Clear existing content from container
+
+    const validHeadings = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+    const headingTag = validHeadings.includes(headingLevel.toLowerCase()) ? headingLevel.toLowerCase() : 'h2';
+
+    if (!containerElement || !(containerElement instanceof HTMLElement)) {
+        console.error("Invalid container element provided.");
+        return;
+    }
+
+    //For each project, create a new <article> element to hold its details.
+    projects.forEach(project => {
+        const article = document.createElement('article');
+
+        article.innerHTML = `
+            <h3>${project.title ?? "Untitled Project"}</h3>
+            ${
+                project.image
+                ? `<img src="${project.image}" alt="${project.title ?? "No title"}">`
+                : `<div class="placeholder">No image available</div>`
+            }
+            <p>${project.description ?? "No description provided."}</p>
+        `;
+
+        containerElement.appendChild(article);
+    });
+}
