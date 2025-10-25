@@ -115,3 +115,58 @@ nav a:hover {
   color: inherit;
   border: 1px solid currentColor;
 }
+
+
+/* Profile stats: */
+#profile-stats {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background-color: var(--accent-color, #0077ff);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--surface, #fff);
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 10;
+  width: 300px;
+}
+
+.dropdown-content dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.dropdown-content dt {
+  grid-row: 1;
+  font-weight: bold;
+}
+
+.dropdown-content dd {
+  grid-row: 2;
+  margin: 0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
